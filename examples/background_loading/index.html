@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Qt Background Loading</title>
+    <script src="../testapp/testapp.js"></script>
+
+    <script>
+        window.addEventListener('load', async () => {
+
+            let container = document.getElementById("appcontainer");
+
+            // Call createQtAppInstance() from testapp.js. This function takes a
+            // config object containing standard Emscripten configuration options.
+            // In addtion, Qt app instances reads a couple of options like "qtContainerElements"
+            // at startup.
+            let instance = await createQtAppInstance({
+                "qtContainerElements": [container]
+            });
+
+            // At this point the Qt instance has been created; update the
+            // the web page to to displat the application container. 
+            container.style.visibility = "visible";
+
+        })
+    </script>
+
+  </head>
+  <body>
+
+      <h1>Qt for WebAssembly: Background Loading</h1>
+
+      <p>This example shows how to load a Qt for WebAssembly application
+         in the background, while the web page displays initial page content.</p>
+
+      <p>The example does not use the standard Qt JavaScript loader (qtloader.js),
+         but instead implements a custom loader which creates the applicaton instance
+         using Emscripten API.</p>
+
+      <p>The application window will appear below, when loaded.</p>
+
+      <div id="appcontainer" style="width:320px; height:200px; visibility:hidden"></div>
+
+  </body>
+</html>
