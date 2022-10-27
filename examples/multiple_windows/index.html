@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Qt Multiple Windows</title>
+    
+    <script src="../testapp/testapp.js"></script>
+    <script src="qwm.js"></script>
+
+    <script>
+
+        let instance = undefined;
+        let cascadeOffset = 50;
+        let n = 0;
+        
+        window.addEventListener('load', async () => 
+        {
+            // Call createQtAppInstance() from testapp.js.
+            instance = await createQtAppInstance({
+                "qtContainerElements": []
+            });
+
+            // The Qt instance has been created; enable ui.
+            let addWindow = document.getElementById("create-window-button");
+            addWindow.disabled = false;
+            addWindow.addEventListener("click", () =>
+            {
+                cascadeOffset += 10;
+                n += 1;
+                
+                // qwm.js implements a minimal/toy html window manager, which we'll
+                // use for the purpose of this example. Using this window manager is
+                // not required; the window containers can also be managed using html
+                // layouts.
+                let window = new QwmWindow(cascadeOffset, cascadeOffset);
+                window.title = "Window #" + n;
+            
+                var container = document.createElement("div");
+                container.id = "window-container" + n;
+                container.style.width = "100%";
+                container.style.height = "100%";
+                window.content = container;
+            
+                window.visible = true;
+                instance.qtAddContainerElement(container);
+
+                window.onClose(() => instance.qtRemoveContainerElement(window.content));
+
+                // Qt may not pick up on container geometry change - notify manually.
+                window.onGeometryUpdate(() => instance.qtResizeContainerElement(window.content));
+            });
+        });
+    </script>
+
+  </head>
+  <body>
+      <h1>Qt for WebAssembly: Multiple Windows</h1>
+
+      <p>This example shows how to display multiple Qt windows on a web page,
+         using a single WebAssembly instance.</p>
+         
+      <p>Clicking the button below adds a new window container element to the
+         page, and registers it with the application instance. The applicaiton
+         sees this element as a new screen, and populates it with a (fullscreen)
+         window.</p>
+
+      <p>The application window will appear below, when loaded.</p>
+      
+      <button type="button" id="create-window-button" disabled>Create Window</button>
+  </body>
+</html>
