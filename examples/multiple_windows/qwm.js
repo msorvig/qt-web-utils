@@ -48,8 +48,8 @@ class QwmWindow {
             backgroundColor : "#465dA8",
         });
         installDragHander(this, this.windowTitleContainer, (deltaX, deltaY) => {
-            this.windowContainer.style.left = parseInt(this.windowContainer.style.left) + deltaX + "px";
-            this.windowContainer.style.top = parseInt(this.windowContainer.style.top) + deltaY + "px";
+            this.windowContainer.style.left = parseFloat(this.windowContainer.style.left) + deltaX + "px";
+            this.windowContainer.style.top = parseFloat(this.windowContainer.style.top) + deltaY + "px";
             if (this.geometryUpdateCallback !== undefined)
                 this.geometryUpdateCallback();
         })
@@ -96,14 +96,14 @@ class QwmWindow {
         setStyles(this.windowResizeButton, {
             position : "absolute",
             backgroundColor : "#FFFFFF50",
-            left : (parseInt(this.windowContainer.style.width) - resizeHandleSize) + "px",
-            top : (parseInt(this.windowContainer.style.height) - resizeHandleSize) + "px",
+            left : (parseFloat(this.windowContainer.style.width) - resizeHandleSize) + "px",
+            top : (parseFloat(this.windowContainer.style.height) - resizeHandleSize) + "px",
             width : resizeHandleSize + "px",
             height : resizeHandleSize + "px"
         });
         installDragHander(this, this.windowResizeButton, (deltaX, deltaY) => {
-            let newWidth = Math.max(parseInt(windowWidth), parseInt(this.windowContainer.style.width) + deltaX);
-            let newHeight = Math.max(parseInt(windowheight), parseInt(this.windowContainer.style.height) + deltaY);
+            let newWidth = Math.max(parseFloat(windowWidth), parseFloat(this.windowContainer.style.width) + deltaX);
+            let newHeight = Math.max(parseFloat(windowheight), parseFloat(this.windowContainer.style.height) + deltaY);
             this.windowContainer.style.width = newWidth + "px";
             
             this.windowContainer.style.height = newHeight + "px";
