@@ -28,10 +28,7 @@
                 cascadeOffset += 10;
                 n += 1;
                 
-                // qwm.js implements a minimal/toy html window manager, which we'll
-                // use for the purpose of this example. Using this window manager is
-                // not required; the window containers can also be managed using html
-                // layouts.
+                // qwm.js implements a minimal/toy html window manager, for the purpose of this example.
                 let window = new QwmWindow(cascadeOffset, cascadeOffset);
                 window.title = "Window #" + n;
             
@@ -58,14 +55,16 @@
 
       <p>This example shows how to display multiple Qt windows on a web page,
          using a single WebAssembly instance.</p>
-         
-      <p>Clicking the button below adds a new window container element to the
-         page, and registers it with the application instance. The applicaiton
-         sees this element as a new screen, and populates it with a (fullscreen)
+
+      <p>Clicking the button below adds a new Qt container element to the page
+         and registers it with the application instance. The applicaiton sees
+         this element as a new screen, and populates it with a (fullscreen)
          window.</p>
 
-      <p>The application window will appear below, when loaded.</p>
-      
+      <p>The example implements a simple html-based window manager which facilitates
+         dynamic window creation and placment. However this is not required: Qt
+         container elments can be positioned using standard html layout features as well.</p>
+
       <button type="button" id="create-window-button" disabled>Create Window</button>
   </body>
 </html>
