@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Qt Multiple Instances</title>
+    <script src="../testapp/testapp.js"></script>
+
+    <script>
+        // This example shows how to create two wasm instance from
+        // a shared wasm module. The module is downloaded and compiled
+        // once.
+
+        // This requires configuring Emscripten to use a custom instantiate
+        // function. This function then calls WebAssembly.instantiate() on
+        // the shared module object.
+
+        // Fetch and compile wasm module (once).
+        let module = WebAssembly.compileStreaming(fetch("../testapp/testapp.wasm"));
+
+        async function instantiateWasm(imports, successCallback) {
+            try {
+                let output = await WebAssembly.instantiate(await module, imports);
+                successCallback(output);
+            } catch (e) {
+                console.error(e);
+            }
+            return {};
+        }
+
+        async function instantiateApp(targetElement) {
+            let container = document.getElementById(targetElement);
+            let instance = await createQtAppInstance({
+                "qtContainerElements": [container],
+                "instantiateWasm": instantiateWasm,
+            });
+            container.style.visibility = "visible";
+        }
+
+        // Create instances at window load
+        window.addEventListener('load', () => {
+            instantiateApp("appcontainer1");
+            instantiateApp("appcontainer2");
+        })
+    </script>
+  </head>
+  <body>
+    <h1>Qt for WebAssembly: Multiple Instances</h1>
+
+    <p>This example shows how to create multiple application instances from
+       a single WebAssembly module. The WebAssembly binary is downloaded once,
+       and compiled to a module once.</p>
+
+    <p>The application windows will appear below, when loaded.</p>
+
+    <div id="appcontainer1" style="width:320px; height:200px; visibility:hidden"></div>
+    <p>Window below not showing? Upgrade to Qt >= 6.5.</p >
+    <div id="appcontainer2" style="width:320px; height:200px; visibility:hidden"></div>
+  </body>
+</html>
