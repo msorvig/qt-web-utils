@@ -2,8 +2,12 @@
 #define QTWEBUTILS_H
 
 #include <QtCore/QString>
-#include <QtCore/QString>
+#include <QtCore/QSize>
 #include <QtQml/QQmlEngine>
+
+namespace emscripten {
+    class val;
+}
 
 namespace qtwebutils {
     
@@ -14,6 +18,13 @@ namespace qtwebutils {
     void toggleFullscreen();
     void enableTabCloseConfirmation(bool enable);
 
+    enum OpenWindowMode {
+        Tab,
+        Window
+    };
+
+    emscripten::val openBrowserWindow(const QString& source, const QString &name, QSize size, OpenWindowMode openMode);
+    void closeBrowserWindow(emscripten::val window);
 }
 
 class QtWebUtils : public QObject
@@ -30,6 +41,9 @@ public:
 
     Q_INVOKABLE void toggleFullscreen();
     Q_INVOKABLE void enableTabCloseConfirmation(bool enable);
+
+    Q_INVOKABLE QString openBrowserWindow(const QString& source, const QString &name, QSize size, bool createWindow);
+    Q_INVOKABLE void closeBrowserWindow(const QString &name);
 };
 
 #endif // QTWEBUTILS_H

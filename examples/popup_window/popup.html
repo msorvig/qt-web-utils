@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            html, body { padding: 0; margin : 0; overflow:hidden; height: 100% }
+        </style>
+        <script>
+            // This popup window contains a container for Qt content. Add it to the set of container
+            // elements for the applicaiton instance. The container element will show up as a new
+            // QScreen for the application, where it can place window content.
+            let instance = undefined;
+            var container = undefined;
+            
+            window.onload = () => {
+                instance = window.opener.instance;
+                container = document.getElementById("container");
+                instance.qtAddContainerElement(container);
+            }
+            window.onunload = () => {
+                instance.qtRemoveContainerElement(container);
+            }
+            window.onresize = () => {
+                instance.qtResizeContainerElement(container);
+            }
+        </script>
+</head>
+<body>
+    <div id="container" style="height:100%; width:100%"></div>
+</body>

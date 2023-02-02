@@ -13,7 +13,7 @@ int main(int argc, char **argv)
 {
     // Qt for WebAassembly supports the standard Qt application startup
     // approach where the application assumes the presence of at least
-    // one screen, and then creates and shows an applicaiton window:
+    // one screen, and then creates and shows an application window:
     //
     // RasterWindow window;
     // window.show();

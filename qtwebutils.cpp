@@ -1,6 +1,8 @@
 #include "qtwebutils.h"
 
 #include <QtCore/qfile.h>
+#include <QtCore/qsize.h>
+#include <QtCore/qhash.h>
 #include <QtGui/private/qwasmlocalfileaccess_p.h>
 
 #include <emscripten/val.h>
@@ -124,6 +126,40 @@ EMSCRIPTEN_BINDINGS(qt_webutils) {
     function("qt_webutils_beforeUnloadHandler", &beforeUnloadhandler);
 }
 
+/*!
+    Opens a new browser window or tab.
+
+    \a source is the url to the source code for the new tab.
+    \a name is the identifier for the window, and must be unique
+    \a size is the requested size for the window
+    \a mode is the open mode: Window or Tab
+
+    Returns a handle to the window as an emscripten::val. The handle
+    is a WindowProxy, which is again a wrapper around a Window.
+
+    See related documentation:
+        https://developer.mozilla.org/en-US/docs/Web/API/Window/open
+        https://developer.mozilla.org/en-US/docs/Glossary/WindowProxy
+        https://developer.mozilla.org/en-US/docs/Web/API/Window
+*/
+emscripten::val qtwebutils::openBrowserWindow(const QString& source, const QString &name, QSize size, qtwebutils::OpenWindowMode openMode)
+{
+    QString popup = openMode != qtwebutils::OpenWindowMode::Window ? QString("Popup") : QString("");
+    QString features = QString("height=%2, width=%1 ").arg(size.width()).arg(size.height()) + popup;
+    emscripten::val popupWindow = emscripten::val::global("window")
+        .call<emscripten::val>("open", source.toStdString(), name.toStdString(),
+                               features.toStdString());
+    return popupWindow;
+}
+
+/*!
+    Closes a browser window by calling close() on it.
+*/
+void qtwebutils::closeBrowserWindow(emscripten::val window)
+{
+    window.call<void>("close");
+}
+
 QtWebUtils::QtWebUtils(QObject *parent)
 :QObject(parent)
 {
@@ -154,4 +190,20 @@ void QtWebUtils::enableTabCloseConfirmation(bool enable)
     qtwebutils::enableTabCloseConfirmation(enable);
 }
 
+typedef QHash<QString, emscripten::val> WindowHash;
+Q_GLOBAL_STATIC(WindowHash, g_windows); // (use global static to keep it out of the header)
 
+// QString-based API for Qt Quick, which returns the window name instead of an emscritpen::val
+QString QtWebUtils::openBrowserWindow(const QString& source, const QString &name, QSize size, bool createWindow)
+{
+    qtwebutils::OpenWindowMode mode = createWindow ? qtwebutils::OpenWindowMode::Window : qtwebutils::OpenWindowMode::Tab;
+    emscripten::val window = qtwebutils::openBrowserWindow(source, name, size, mode);
+    g_windows->insert(name, window);
+    return name;
+}
+
+Q_INVOKABLE void QtWebUtils::closeBrowserWindow(const QString &name)
+{
+    emscripten::val window = g_windows->take(name);
+    qtwebutils::closeBrowserWindow(window);
+}

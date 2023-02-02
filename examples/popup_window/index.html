@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Qt Popup Window</title>
+
+    <script src="../testapp/testapp.js"></script>
+
+    <script>
+        window.addEventListener('load', async () => {
+
+            // Create Qt application instance with no container elements.
+            instance = await createQtAppInstance({
+                 "qtContainerElements": []
+            });
+
+            let openPopup = document.getElementById("open-popup");
+            openPopup.disabled = false;
+            openPopup.addEventListener("click", () => {
+                instance.openPopup("popup.html");
+            });
+
+            let closePopup = document.getElementById("close-popup");
+            closePopup.disabled = false;
+            closePopup.addEventListener("click", () => {
+                instance.closePopup();
+            });
+        })
+    </script>
+
+  </head>
+  <body>
+      <h1>Qt for WebAssembly: Popup Window</h1>
+
+      <p>This example shows how to create a new browser window (also known as
+          a popup window) and populate it with Qt application content .</p>
+      <button type="button" id="open-popup" disabled>Open Popup Window</button>
+      <button type="button" id="close-popup" disabled>Close Popup Window</button>
+  </body>
+</html>

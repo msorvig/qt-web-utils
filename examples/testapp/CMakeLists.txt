@@ -6,10 +6,13 @@ set(CMAKE_AUTOMOC ON)
 find_package(Qt6 REQUIRED COMPONENTS Core Gui)
 
 qt_add_executable(testapp
-    main.cpp rasterwindow.cpp
+    main.cpp rasterwindow.cpp ../../qtwebutils.cpp popup.cpp
 )
 
 target_link_libraries(testapp PUBLIC
     Qt::Core
     Qt::Gui
+    Qt::GuiPrivate # requied by QWasmLocalFileAccess in qtwebutils.cpp
 )
+
+include_directories("../../")
