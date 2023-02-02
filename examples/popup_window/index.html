@@ -9,7 +9,9 @@
     <script>
         window.addEventListener('load', async () => {
 
-            // Create Qt application instance with no container elements.
+            // Create Qt application instance. This instance exports openPopup and
+            // closePopup, which we call below. See ../testapp/popup.cpp for the
+            // implementation.
             instance = await createQtAppInstance({
                  "qtContainerElements": []
             });
