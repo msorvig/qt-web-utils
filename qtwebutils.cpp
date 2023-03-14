@@ -207,3 +207,5 @@ Q_INVOKABLE void QtWebUtils::closeBrowserWindow(const QString &name)
     emscripten::val window = g_windows->take(name);
     qtwebutils::closeBrowserWindow(window);
 }
+
+#include "qtwebutils_localfonts.cpp"

@@ -25,6 +25,12 @@ namespace qtwebutils {
 
     emscripten::val openBrowserWindow(const QString& source, const QString &name, QSize size, OpenWindowMode openMode);
     void closeBrowserWindow(emscripten::val window);
+
+    void getFontFamilies(std::function<void(const QStringList &)> families = std::function<void(const QStringList &)>());
+    void populateFontFamily(const QString &family, std::function<void(const QList<int> &)> populated = std::function<void(const QList<int> &)>());
+    void populateFontFamilies(const QStringList &families, std::function<void(const QList<int> &)> populated = std::function<void(const QList<int> &)>());
+    QStringList webSafeFontFamilies();
+    void populateWebSafeFamilies(std::function<void(const QList<int> &)> populated = std::function<void(const QList<int> &)>());
 }
 
 class QtWebUtils : public QObject
