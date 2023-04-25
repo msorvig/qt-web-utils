@@ -87,7 +87,8 @@ class QwmWindow {
         this.windowContainer.appendChild(this.windowContentContainer);
         setStyles(this.windowContentContainer, {
             flex : 1,
-            minHeight: "60px"
+            minHeight: "60px",
+            zIndex : 0
         });
 
         // window resize area
@@ -99,7 +100,8 @@ class QwmWindow {
             left : (parseFloat(this.windowContainer.style.width) - resizeHandleSize) + "px",
             top : (parseFloat(this.windowContainer.style.height) - resizeHandleSize) + "px",
             width : resizeHandleSize + "px",
-            height : resizeHandleSize + "px"
+            height : resizeHandleSize + "px",
+            zIndex : 1
         });
         installDragHander(this, this.windowResizeButton, (deltaX, deltaY) => {
             let newWidth = Math.max(parseFloat(windowWidth), parseFloat(this.windowContainer.style.width) + deltaX);
