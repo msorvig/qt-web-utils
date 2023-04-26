@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Qt Multiple Windows</title>
+
+    <script src="../testapp/qtloader.js"></script>
+
+    <script>
+        window.addEventListener('load', () => {
+            const containers = document.querySelectorAll("div.container")
+            const qtloader = QtLoader({
+                containerElements: Array.from(containers),
+                showLoader: () => {}, // disable loading notification
+            });
+            qtloader.loadEmscriptenModule("../testapp/testapp");
+        });
+    </script>
+
+  </head>
+  <body>
+      <h1>Qt for WebAssembly: Multiple Windows</h1>
+      <p>This example shows how to display multiple Qt windows on a web page,
+         using a single WebAssembly instance.</p>
+      <div class="container" style="width:320px; height:200px; padding:10px"></div>
+      <div class="container" style="width:320px; height:200px; padding:10px"></div>
+  </body>
+</html>
