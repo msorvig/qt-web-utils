@@ -1,6 +1,6 @@
 # qt-web-utils
 
-Utilities and Helper functions for Qt on the Web
+Utilities and Helper functions for Qt on the Web.
 
 # Utility API
 
@@ -20,6 +20,10 @@ functions on QtWebUtils singleton for use from QML
 
   Loads file from the local file system via file dialog; saves to the in-memory file system
   provided by Emscripten. See also QFileDialog::getOpenFileContents() in Qt.
+
+* openBrowserWindow()
+
+  Opens a native browser window or tab.
 
 # Examples
 
