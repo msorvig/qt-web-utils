@@ -3,6 +3,8 @@
 
 #include <QtCore/QString>
 #include <QtCore/QSize>
+#include <QtCore/QObject>
+
 #include <QtQml/QQmlEngine>
 
 namespace emscripten {
