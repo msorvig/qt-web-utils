@@ -64,43 +64,36 @@ void RasterWindow::exposeEvent(QExposeEvent * ev)
 
 void RasterWindow::focusInEvent(QFocusEvent * ev)
 {
-    QRasterWindow::focusInEvent(ev);
     incrementEventCount();
 }
 
 void RasterWindow::focusOutEvent(QFocusEvent * ev)
 {
-    QRasterWindow::focusOutEvent(ev);
     incrementEventCount();
 }
 
 void RasterWindow::hideEvent(QHideEvent * ev)
 {
-    QRasterWindow::hideEvent(ev);
     incrementEventCount();
 }
 
 void RasterWindow::keyPressEvent(QKeyEvent * ev)
 {
-    QRasterWindow::keyPressEvent(ev);
     incrementEventCount();
 }
 
 void RasterWindow::keyReleaseEvent(QKeyEvent * ev)
 {
-    QRasterWindow::keyReleaseEvent(ev);
     incrementEventCount();
 }
 
 void RasterWindow::mouseDoubleClickEvent(QMouseEvent * ev)
 {
-    QRasterWindow::mouseDoubleClickEvent(ev);
     incrementEventCount();
 }
 
 void RasterWindow::mouseMoveEvent(QMouseEvent * ev)
 {
-    QRasterWindow::mouseMoveEvent(ev);
     incrementEventCount();
 
     if (m_pressed)
@@ -110,21 +103,18 @@ void RasterWindow::mouseMoveEvent(QMouseEvent * ev)
 
 void RasterWindow::mousePressEvent(QMouseEvent * ev)
 {
-    QRasterWindow::mousePressEvent(ev);
     incrementEventCount();
     m_pressed = true;
 }
 
 void RasterWindow::mouseReleaseEvent(QMouseEvent * ev)
 {
-    QRasterWindow::mouseReleaseEvent(ev);
     incrementEventCount();
     m_pressed = false;
 }
 
 void RasterWindow::moveEvent(QMoveEvent * ev)
 {
-    QRasterWindow::moveEvent(ev);
     incrementEventCount();
 }
 
@@ -142,19 +132,16 @@ void RasterWindow::showEvent(QShowEvent * ev)
 
 void RasterWindow::tabletEvent(QTabletEvent * ev)
 {
-    QRasterWindow::tabletEvent(ev);
     incrementEventCount();
 }
 
 void RasterWindow::touchEvent(QTouchEvent * ev)
 {
-    QRasterWindow::touchEvent(ev);
     incrementEventCount();
 }
 
 void RasterWindow::wheelEvent(QWheelEvent * ev)
 {
-    QRasterWindow::wheelEvent(ev);
     incrementEventCount();
     m_offset += ev->pixelDelta();
 }
