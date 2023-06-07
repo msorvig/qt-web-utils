@@ -5,6 +5,7 @@
     <title>Qt Multiple Windows</title>
     
     <script src="../testapp/testapp.js"></script>
+    <script src="../testapp/qtloader.js"></script>
     <script src="qwm.js"></script>
 
     <script>
@@ -15,10 +16,9 @@
         
         window.addEventListener('load', async () => 
         {
-            // Call createQtAppInstance() from testapp.js.
-            instance = await createQtAppInstance({
-                "qtContainerElements": []
-            });
+            // Create test app instance via the default window.createQtAppInstance entry function
+            // set by testapp.js
+            const instance = await qtLoad({});
 
             // The Qt instance has been created; enable ui.
             let addWindow = document.getElementById("create-window-button");

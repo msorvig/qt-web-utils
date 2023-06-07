@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Qt Multiple Instances</title>
     <script src="../testapp/testapp.js"></script>
+    <script src="../testapp/qtloader.js"></script>
 
     <script>
         // This example shows how to create two wasm instance from
@@ -15,23 +16,16 @@
         // the shared module object.
 
         // Fetch and compile wasm module (once).
-        let module = WebAssembly.compileStreaming(fetch("../testapp/testapp.wasm"));
-
-        async function instantiateWasm(imports, successCallback) {
-            try {
-                let output = await WebAssembly.instantiate(await module, imports);
-                successCallback(output);
-            } catch (e) {
-                console.error(e);
-            }
-            return {};
-        }
+        const module = WebAssembly.compileStreaming(fetch("../testapp/testapp.wasm"));
 
         async function instantiateApp(targetElement) {
-            let container = document.getElementById(targetElement);
-            let instance = await createQtAppInstance({
-                "qtContainerElements": [container],
-                "instantiateWasm": instantiateWasm,
+            const container = document.getElementById(targetElement);
+            const instance = await qtLoad({
+                qt: {
+                    containerElements: [container],
+                    modulePromise: module,
+                    module: module, // ### decide on which one
+                }
             });
             container.style.visibility = "visible";
         }

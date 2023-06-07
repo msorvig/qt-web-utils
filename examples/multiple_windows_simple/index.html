@@ -4,16 +4,17 @@
     <meta charset="utf-8">
     <title>Qt Multiple Windows</title>
 
+    <script src="../testapp/testapp.js"></script>
     <script src="../testapp/qtloader.js"></script>
 
     <script>
-        window.addEventListener('load', () => {
-            const containers = document.querySelectorAll("div.container")
-            const qtloader = QtLoader({
-                containerElements: Array.from(containers),
-                showLoader: () => {}, // disable loading notification
+        window.addEventListener('load', async () => {
+            const containers = Array.from(document.querySelectorAll("div.container"))
+            const instance = await qtLoad({
+                qt: {
+                    containerElements: containers,
+                }
             });
-            qtloader.loadEmscriptenModule("../testapp/testapp");
         });
     </script>
 
