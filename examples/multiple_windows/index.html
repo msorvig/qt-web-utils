@@ -4,21 +4,21 @@
     <meta charset="utf-8">
     <title>Qt Multiple Windows</title>
     
-    <script src="../testapp/testapp.js"></script>
+    <script src="../testapp/qtloader.js"></script>
     <script src="qwm.js"></script>
 
     <script>
 
-        let instance = undefined;
+        let qtloader = undefined;
         let cascadeOffset = 50;
         let n = 0;
         
         window.addEventListener('load', async () => 
         {
-            // Call createQtAppInstance() from testapp.js.
-            instance = await createQtAppInstance({
-                "qtContainerElements": []
+            qtloader = QtLoader({
+                containerElements: [],
             });
+            qtloader.loadEmscriptenModule("../testapp/testapp");
 
             // The Qt instance has been created; enable ui.
             let addWindow = document.getElementById("create-window-button");
@@ -39,12 +39,12 @@
                 window.content = container;
             
                 window.visible = true;
-                instance.qtAddContainerElement(container);
+                qtloader.addCanvasElement(container);
 
-                window.onClose(() => instance.qtRemoveContainerElement(window.content));
+                window.onClose(() => qtloader.removeCanvasElement(window.content));
 
                 // Qt may not pick up on container geometry change - notify manually.
-                window.onGeometryUpdate(() => instance.qtResizeContainerElement(window.content));
+                window.onGeometryUpdate(() => qtloader.resizeCanvasElement(window.content));
             });
         });
     </script>
