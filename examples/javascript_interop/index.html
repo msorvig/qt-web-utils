@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>JavaScript Interop</title>
+
+    <script src="../testapp/testapp.js"></script>
+    <script src="../testapp/qtloader.js"></script>
+    <script>
+
+        // JavaScript function which can be called from C++, see
+        // ../testapp/jsinterop.cpp
+        function helloJs(name) {
+            console.log("Hello " + name + " from helloJs");
+        }
+
+        // A pice of data, can be accessed from C++ as well
+        window.data = new Uint8Array([1, 2, 3 ,4]);
+
+        window.addEventListener('load', async () => {
+            const instance = await qtLoad({qt:{}});
+
+            // enable the "Call C++" button which calls the function exported from jsinterop.cpp.
+            const callCppButton = document.getElementById("callcpp");
+            callCppButton.disabled = false;
+            callCppButton.addEventListener("click", () => {
+                instance["helloCpp"]("Qt");
+            });
+        })
+    </script>
+  </head>
+  <body>
+      <h1>Qt for WebAssembly: JavaScript Interop</h1>
+      <p> This examples show how to call C++ functions from JavaScript,
+          and vice versa. Output is printed to the JavaScript console.</p>
+      <button type="button" id="callcpp" disabled>Call C++ function</button>
+  </body>
+</html>
