@@ -6,7 +6,11 @@ set(CMAKE_AUTOMOC ON)
 find_package(Qt6 REQUIRED COMPONENTS Core Gui)
 
 qt_add_executable(testapp
-    main.cpp rasterwindow.cpp ../../qtwebutils.cpp popup.cpp
+    main.cpp
+    rasterwindow.cpp
+    popup.cpp
+    jsinterop.cpp
+    ../../qtwebutils.cpp
 )
 
 target_link_libraries(testapp PUBLIC
