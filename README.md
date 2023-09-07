@@ -30,13 +30,19 @@ functions on QtWebUtils singleton for use from QML
 The examples are located in the exampels/ directory and demonstrates how to integrate with the web
 platform, beyond what the default Qt build does.
 
-* testapp
+Usage: build examples/testapp first, using Qt for WebAssembly. This application contains common code
+used by the examples. The app should be built in-source (i.e. not using shadow builds).
 
-  Test application, used by by the examples.
+    (in examples/testapp): /path/to/qt-wasm/bin/qt-cmake .
 
 * background_loading
 
   Shows how to load a Qt applicaiton in the background, without delaying page loading.
+
+* javascript_interop
+
+  Shows how to make function calls between C++ and JavaScript, and how to transfer data
+  from the JavaScript heap to the C++ heap.
 
 * multiple_instances
 
