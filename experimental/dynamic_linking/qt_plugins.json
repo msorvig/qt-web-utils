@@ -1,0 +1,18 @@
+[
+  {
+    "source": "$QTDIR/plugins/imageformats/libqico.so",
+    "destination": "/qt/plugins/imageformats/libqico.so"
+  },
+  {
+    "source": "$QTDIR/plugins/imageformats/libqjpeg.so",
+    "destination": "/qt/plugins/imageformats/libqjpeg.so"
+  },
+  {
+    "source": "$QTDIR/plugins/imageformats/libqgif.so",
+    "destination": "/qt/plugins/imageformats/libqgif.so"
+  },
+  {
+    "source": "qt.conf",
+    "destination": "/qt.conf"
+  }
+]

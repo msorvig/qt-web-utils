@@ -1,0 +1,58 @@
+[
+  {
+    "source": "$QTDIR/qml/QtCore/libqtqmlcoreplugin.so",
+    "destination": "/qt/qml/QtCore/libqtqmlcoreplugin.so"
+  },
+  {
+    "source": "$QTDIR/qml/QtCore/qmldir",
+    "destination": "/qt/qml/QtCore/qmldir"
+  },
+  {
+    "source": "$QTDIR/qml/QtQml/libqmlmetaplugin.so",
+    "destination": "/qt/qml/QtQml/libqmlmetaplugin.so"
+  },
+  {
+    "source": "$QTDIR/qml/QtQml/qmldir",
+    "destination": "/qt/qml/QtQml/qmldir"
+  },
+  {
+    "source": "$QTDIR/qml/QtQml/Base/libqmlplugin.so",
+    "destination": "/qt/qml/QtQml/Base/libqmlplugin.so"
+  },
+  {
+    "source": "$QTDIR/qml/QtQml/Base/qmldir",
+    "destination": "/qt/qml/QtQml/Base/qmldir"
+  },
+  {
+    "source": "$QTDIR/qml/QtQml/Models/libmodelsplugin.so",
+    "destination": "/qt/qml/QtQml/Models/libmodelsplugin.so"
+  },
+  {
+    "source": "$QTDIR/qml/QtQml/Models/qmldir",
+    "destination": "/qt/qml/QtQml/Models/qmldir"
+  },
+  {
+    "source": "$QTDIR/qml/QtQuick/libqtquick2plugin.so",
+    "destination": "/qt/qml/QtQuick/libqtquick2plugin.so"
+  },
+  {
+    "source": "$QTDIR/qml/QtQuick/qmldir",
+    "destination": "/qt/qml/QtQuick/qmldir"
+  },
+  {
+    "source": "$QTDIR/qml/QtQuick/Window/libquickwindowplugin.so",
+    "destination": "/qt/qml/QtQuick/Window/libquickwindowplugin.so"
+  },
+  {
+    "source": "$QTDIR/qml/QtQuick/Window/qmldir",
+    "destination": "/qt/qml/QtQuick/Window/qmldir"
+  },
+  {
+    "source": "$QTDIR/lib/libQt6QmlCore.so",
+    "destination": "/libQt6QmlCore.so"
+  },
+  {
+    "source": "$QTDIR/lib/libQt6QmlModels.so",
+    "destination": "/libQt6QmlModels.so"
+  }
+]
