@@ -18,7 +18,11 @@
         {
             // Create test app instance via the default window.createQtAppInstance entry function
             // set by testapp.js
-            const instance = await qtLoad({});
+            const instance = await qtLoad({
+                qt: {
+                    entryFunction: testapp_entry
+                }
+            });
 
             // The Qt instance has been created; enable ui.
             let addWindow = document.getElementById("create-window-button");

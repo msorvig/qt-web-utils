@@ -13,7 +13,11 @@
             // Create Qt application instance. This instance exports openPopup and
             // closePopup, which we call below. See ../testapp/popup.cpp for the
             // implementation.
-            window.instance = await qtLoad({});
+            window.instance = await qtLoad({
+                qt: {
+                    entryFunction: testapp_entry
+                }
+            });
 
             let openPopup = document.getElementById("open-popup");
             openPopup.disabled = false;

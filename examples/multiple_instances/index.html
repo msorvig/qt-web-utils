@@ -23,8 +23,8 @@
             const instance = await qtLoad({
                 qt: {
                     containerElements: [container],
-                    modulePromise: module,
-                    module: module, // ### decide on which one
+                    module: module,
+                    entryFunction: testapp_entry
                 }
             });
             container.style.visibility = "visible";
@@ -47,7 +47,7 @@
     <p>The application windows will appear below, when loaded.</p>
 
     <div id="appcontainer1" style="width:320px; height:200px; visibility:hidden"></div>
-    <p>Window below not showing? Upgrade to Qt >= 6.5.</p >
+    <br>
     <div id="appcontainer2" style="width:320px; height:200px; visibility:hidden"></div>
   </body>
 </html>

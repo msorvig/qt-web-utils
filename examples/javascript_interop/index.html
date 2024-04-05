@@ -18,7 +18,11 @@
         window.data = new Uint8Array([1, 2, 3 ,4]);
 
         window.addEventListener('load', async () => {
-            const instance = await qtLoad({qt:{}});
+            const instance = await qtLoad({
+                qt: {
+                    entryFunction: testapp_entry
+                }
+            });
 
             // enable the "Call C++" button which calls the function exported from jsinterop.cpp.
             const callCppButton = document.getElementById("callcpp");
