@@ -1,0 +1,14 @@
+[
+  {
+    "source": "$QTDIR/plugins/platforms/libqwasm.so",
+    "destination": "/qt/plugins/platforms/libqwasm.so"
+  },
+  {
+    "source": "$QTDIR/plugins/imageformats/libqjpeg.so",
+    "destination": "/qt/plugins/imageformats/libqjpeg.so"
+  },
+  {
+    "source": "qt.conf",
+    "destination": "/qt.conf"
+  }
+]
