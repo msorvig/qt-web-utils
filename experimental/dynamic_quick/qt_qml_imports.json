@@ -1,0 +1,10 @@
+[
+  {
+    "source": "$QTDIR/qml/QtQuick/Window/libquickwindowplugin.so",
+    "destination": "/qt/qml/QtQuick/Window/libquickwindowplugin.so"
+  },
+  {
+    "source": "$QTDIR/qml/QtQuick/Window/qmldir",
+    "destination": "/qt/qml/QtQuick/Window/qmldir"
+  }
+]
