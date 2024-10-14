@@ -4,6 +4,7 @@
 #include <QtCore/QString>
 #include <QtCore/QSize>
 #include <QtCore/QObject>
+#include <QtCore/QHash>
 
 #include <QtQml/QQmlEngine>
 
@@ -27,6 +28,9 @@ namespace qtwebutils {
 
     emscripten::val openBrowserWindow(const QString& source, const QString &name, QSize size, OpenWindowMode openMode);
     void closeBrowserWindow(emscripten::val window);
+
+    QString queryString();
+    QHash<QString, QString> searchParameters();
 }
 
 class QtWebUtils : public QObject

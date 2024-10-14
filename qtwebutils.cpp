@@ -160,6 +160,41 @@ void qtwebutils::closeBrowserWindow(emscripten::val window)
     window.call<void>("close");
 }
 
+/*!
+    Returns the query string for the current location of the html document.
+
+    For example, if the location is "example.com?q=123" then this function
+    returns "q=123".
+*/
+QString qtwebutils::queryString()
+{
+    return QString::fromEcmaString(emscripten::val::global("window")["location"]["search"]);
+}
+
+/*!
+    Returns the seach parameters for the current location of the html document.
+
+    For example, if the location is "example.com?u=123&v=abc" then this function
+    returns a QHash containing the key-values ("u", "123") and ("v", "abc").
+*/
+QHash<QString, QString> qtwebutils::searchParameters()
+{
+    using emscripten::val;
+
+    val search =  val::global("window")["location"]["search"];
+    val urlSearchParams = val::global("URLSearchParams").new_(search);
+    val iterator = urlSearchParams.call<val>("entries");
+
+    QHash<QString, QString> params;
+    emscripten::val entry = iterator.call<val>("next");
+    while (!entry["done"].as<bool>()) {
+        emscripten::val pair = entry["value"];
+        params.insert(QString::fromEcmaString(pair[0]), QString::fromEcmaString(pair[1]));
+        entry = iterator.call<val>("next");
+    }
+    return params;
+}
+
 QtWebUtils::QtWebUtils(QObject *parent)
 :QObject(parent)
 {
